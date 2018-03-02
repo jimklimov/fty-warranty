@@ -7,7 +7,7 @@
 # Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.61)
 #
-AC_INIT([fty-expiration],[1.0.0],[eatonipcopensource@eaton.com])
+AC_INIT([fty-warranty],[1.0.0],[eatonipcopensource@eaton.com])
 
 AC_CONFIG_AUX_DIR(config)
 AC_CONFIG_MACRO_DIR(config)
@@ -20,11 +20,11 @@ PV_MAJOR=`echo $PACKAGE_VERSION | cut -d . -f 1`
 PV_MINOR=`echo $PACKAGE_VERSION | cut -d . -f 2`
 PV_PATCH=`echo $PACKAGE_VERSION | cut -d . -f 3`
 AC_DEFINE_UNQUOTED([PACKAGE_VERSION_MAJOR],[$PV_MAJOR],
-    [FTY_EXPIRATION major version])
+    [FTY_WARRANTY major version])
 AC_DEFINE_UNQUOTED([PACKAGE_VERSION_MINOR],[$PV_MINOR],
-    [FTY_EXPIRATION minor version])
+    [FTY_WARRANTY minor version])
 AC_DEFINE_UNQUOTED([PACKAGE_VERSION_PATCH],[$PV_PATCH],
-    [FTY_EXPIRATION patchlevel])
+    [FTY_WARRANTY patchlevel])
 # This lets us use PACKAGE_VERSION in Makefiles
 AC_SUBST(PACKAGE_VERSION)
 
@@ -35,7 +35,7 @@ AC_SUBST(PACKAGE_VERSION)
 # know exactly what you're doing and have read and understand
 # http://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
 #
-# libfty_expiration -version-info
+# libfty_warranty -version-info
 LTVER="1:0:0"
 AC_SUBST(LTVER)
 
@@ -43,7 +43,7 @@ AC_SUBST(LTVER)
 AM_CONDITIONAL([USING_VPATH], [test "x${srcdir}" != "x."])
 
 # Capture c flags
-FTY_EXPIRATION_ORIG_CFLAGS="${CFLAGS:-none}"
+FTY_WARRANTY_ORIG_CFLAGS="${CFLAGS:-none}"
 
 # Checks for programs
 AC_PROG_CC
@@ -64,13 +64,13 @@ AC_C_BIGENDIAN
 AC_MSG_CHECKING([whether to enable GCov])
 AC_ARG_WITH(gcov, [AS_HELP_STRING([--with-gcov=yes/no],
                   [With GCC Code Coverage reporting])],
-                  [FTY_EXPIRATION_GCOV="$withval"])
+                  [FTY_WARRANTY_GCOV="$withval"])
 
-if test "x${FTY_EXPIRATION_GCOV}" == "xyes"; then
+if test "x${FTY_WARRANTY_GCOV}" == "xyes"; then
     CFLAGS="-O0 -g -fprofile-arcs -ftest-coverage"
 
-    if test "x${FTY_EXPIRATION_ORIG_CFLAGS}" != "xnone"; then
-        CFLAGS="${CFLAGS} ${FTY_EXPIRATION_ORIG_CFLAGS}"
+    if test "x${FTY_WARRANTY_ORIG_CFLAGS}" != "xnone"; then
+        CFLAGS="${CFLAGS} ${FTY_WARRANTY_ORIG_CFLAGS}"
     fi
     AM_CONDITIONAL(WITH_GCOV, true)
     AC_MSG_RESULT([yes])
@@ -83,9 +83,9 @@ fi
 AC_MSG_CHECKING([whether to enable ASan])
 AC_ARG_ENABLE(address-sanitizer, [AS_HELP_STRING([--enable-address-sanitizer=yes/no],
                   [Build with GCC Address Sanitizer instrumentation])],
-                  [FTY_EXPIRATION_ASAN="$enableval"])
+                  [FTY_WARRANTY_ASAN="$enableval"])
 
-if test "x${FTY_EXPIRATION_ASAN}" == "xyes"; then
+if test "x${FTY_WARRANTY_ASAN}" == "xyes"; then
     CFLAGS="${CFLAGS} -fsanitize=address"
     CXXFLAGS="${CXXFLAGS} -fsanitize=address"
 
@@ -139,7 +139,7 @@ AS_CASE([x"${with_libsodium}"],
 dnl We do not abort right now, because the maintainer/developer may have
 dnl something particular in mind, e.g. to build just parts of a project.
 AS_IF([test x"${search_libsodium}" = xno],
-    [AC_MSG_WARN([Required dependency on libsodium was explicitly disabled during configuration by '--with-libsodium=no'; subsequent full build of fty-expiration may fail])])
+    [AC_MSG_WARN([Required dependency on libsodium was explicitly disabled during configuration by '--with-libsodium=no'; subsequent full build of fty-warranty may fail])])
 
 AS_IF([test x"${search_libsodium}" = xyes], [
     # Archive previously detected and supplied flags
@@ -226,7 +226,7 @@ AS_CASE([x"${with_libzmq}"],
 dnl We do not abort right now, because the maintainer/developer may have
 dnl something particular in mind, e.g. to build just parts of a project.
 AS_IF([test x"${search_libzmq}" = xno],
-    [AC_MSG_WARN([Required dependency on libzmq was explicitly disabled during configuration by '--with-libzmq=no'; subsequent full build of fty-expiration may fail])])
+    [AC_MSG_WARN([Required dependency on libzmq was explicitly disabled during configuration by '--with-libzmq=no'; subsequent full build of fty-warranty may fail])])
 
 AS_IF([test x"${search_libzmq}" = xyes], [
     # Archive previously detected and supplied flags
@@ -313,7 +313,7 @@ AS_CASE([x"${with_libczmq}"],
 dnl We do not abort right now, because the maintainer/developer may have
 dnl something particular in mind, e.g. to build just parts of a project.
 AS_IF([test x"${search_libczmq}" = xno],
-    [AC_MSG_WARN([Required dependency on czmq was explicitly disabled during configuration by '--with-libczmq=no'; subsequent full build of fty-expiration may fail])])
+    [AC_MSG_WARN([Required dependency on czmq was explicitly disabled during configuration by '--with-libczmq=no'; subsequent full build of fty-warranty may fail])])
 
 AS_IF([test x"${search_libczmq}" = xyes], [
     # Archive previously detected and supplied flags
@@ -400,7 +400,7 @@ AS_CASE([x"${with_libmlm}"],
 dnl We do not abort right now, because the maintainer/developer may have
 dnl something particular in mind, e.g. to build just parts of a project.
 AS_IF([test x"${search_libmlm}" = xno],
-    [AC_MSG_WARN([Required dependency on malamute was explicitly disabled during configuration by '--with-libmlm=no'; subsequent full build of fty-expiration may fail])])
+    [AC_MSG_WARN([Required dependency on malamute was explicitly disabled during configuration by '--with-libmlm=no'; subsequent full build of fty-warranty may fail])])
 
 AS_IF([test x"${search_libmlm}" = xyes], [
     # Archive previously detected and supplied flags
@@ -487,7 +487,7 @@ AS_CASE([x"${with_libfty_proto}"],
 dnl We do not abort right now, because the maintainer/developer may have
 dnl something particular in mind, e.g. to build just parts of a project.
 AS_IF([test x"${search_libfty_proto}" = xno],
-    [AC_MSG_WARN([Required dependency on fty_proto was explicitly disabled during configuration by '--with-libfty_proto=no'; subsequent full build of fty-expiration may fail])])
+    [AC_MSG_WARN([Required dependency on fty_proto was explicitly disabled during configuration by '--with-libfty_proto=no'; subsequent full build of fty-warranty may fail])])
 
 AS_IF([test x"${search_libfty_proto}" = xyes], [
     # Archive previously detected and supplied flags
@@ -574,7 +574,7 @@ AS_CASE([x"${with_cxxtools}"],
 dnl We do not abort right now, because the maintainer/developer may have
 dnl something particular in mind, e.g. to build just parts of a project.
 AS_IF([test x"${search_cxxtools}" = xno],
-    [AC_MSG_WARN([Required dependency on cxxtools was explicitly disabled during configuration by '--with-cxxtools=no'; subsequent full build of fty-expiration may fail])])
+    [AC_MSG_WARN([Required dependency on cxxtools was explicitly disabled during configuration by '--with-cxxtools=no'; subsequent full build of fty-warranty may fail])])
 
 AS_IF([test x"${search_cxxtools}" = xyes], [
     # Archive previously detected and supplied flags
@@ -661,7 +661,7 @@ AS_CASE([x"${with_tntdb}"],
 dnl We do not abort right now, because the maintainer/developer may have
 dnl something particular in mind, e.g. to build just parts of a project.
 AS_IF([test x"${search_tntdb}" = xno],
-    [AC_MSG_WARN([Required dependency on tntdb was explicitly disabled during configuration by '--with-tntdb=no'; subsequent full build of fty-expiration may fail])])
+    [AC_MSG_WARN([Required dependency on tntdb was explicitly disabled during configuration by '--with-tntdb=no'; subsequent full build of fty-warranty may fail])])
 
 AS_IF([test x"${search_tntdb}" = xyes], [
     # Archive previously detected and supplied flags
@@ -734,11 +734,11 @@ LIBS="${PREVIOUS_LIBS}"
 AC_SUBST(pkg_config_libs_private, $PKGCFG_LIBS_PRIVATE)
 
 # Platform specific checks
-fty_expiration_on_mingw32="no"
-fty_expiration_on_cygwin="no"
-fty_expiration_on_android="no"
-fty_expiration_on_linux="no"
-fty_expiration_on_gnu="no"
+fty_warranty_on_mingw32="no"
+fty_warranty_on_cygwin="no"
+fty_warranty_on_android="no"
+fty_warranty_on_linux="no"
+fty_warranty_on_gnu="no"
 
 # Host specific checks
 AC_CANONICAL_HOST
@@ -751,46 +751,46 @@ AC_ARG_WITH([docs],
     [with_docs=$withval])
 
 if test "x$with_docs" = "xno"; then
-    fty_expiration_build_doc="no"
-    fty_expiration_install_man="no"
+    fty_warranty_build_doc="no"
+    fty_warranty_install_man="no"
 else
     # Determine whether or not documentation should be built and installed.
-    fty_expiration_build_doc="yes"
-    fty_expiration_install_man="yes"
+    fty_warranty_build_doc="yes"
+    fty_warranty_install_man="yes"
 
     # Check for asciidoc and xmlto and don't build the docs if these are not installed.
-    AC_CHECK_PROG(fty_expiration_have_asciidoc, asciidoc, yes, no)
-    AC_CHECK_PROG(fty_expiration_have_xmlto, xmlto, yes, no)
-    if test "x$fty_expiration_have_asciidoc" = "xno" -o "x$fty_expiration_have_xmlto" = "xno"; then
-        fty_expiration_build_doc="no"
+    AC_CHECK_PROG(fty_warranty_have_asciidoc, asciidoc, yes, no)
+    AC_CHECK_PROG(fty_warranty_have_xmlto, xmlto, yes, no)
+    if test "x$fty_warranty_have_asciidoc" = "xno" -o "x$fty_warranty_have_xmlto" = "xno"; then
+        fty_warranty_build_doc="no"
         # Tarballs built with 'make dist' ship with prebuilt documentation.
-        if ! test -f doc/fty-expiration.7; then
-            fty_expiration_install_man="no"
-            AC_MSG_WARN([You are building an unreleased version of FTY-EXPIRATION and asciidoc or xmlto are not installed.])
+        if ! test -f doc/fty-warranty.7; then
+            fty_warranty_install_man="no"
+            AC_MSG_WARN([You are building an unreleased version of FTY-WARRANTY and asciidoc or xmlto are not installed.])
             AC_MSG_WARN([Documentation will not be built and manual pages will not be installed.])
         fi
     fi
 fi
 AC_MSG_CHECKING([whether to build documentation])
-AC_MSG_RESULT([$fty_expiration_build_doc])
+AC_MSG_RESULT([$fty_warranty_build_doc])
 AC_MSG_CHECKING([whether to install manpages])
-AC_MSG_RESULT([$fty_expiration_install_man])
+AC_MSG_RESULT([$fty_warranty_install_man])
 
-# Set some default features required by libfty_expiration code.
-CPPFLAGS="-DFTY_EXPIRATION_INTERNAL_BUILD -D_REENTRANT -D_THREAD_SAFE $CPPFLAGS"
+# Set some default features required by libfty_warranty code.
+CPPFLAGS="-DFTY_WARRANTY_INTERNAL_BUILD -D_REENTRANT -D_THREAD_SAFE $CPPFLAGS"
 
 # OS-specific tests
 case "${host_os}" in
     *linux*)
         # Define on Linux to enable all library features
         CPPFLAGS="-D_GNU_SOURCE -DLINUX $CPPFLAGS"
-        AC_DEFINE(FTY_EXPIRATION_HAVE_LINUX, 1, [Have Linux OS])
-        fty_expiration_on_linux="yes"
+        AC_DEFINE(FTY_WARRANTY_HAVE_LINUX, 1, [Have Linux OS])
+        fty_warranty_on_linux="yes"
 
         case "${host_os}" in
             *android*)
-                AC_DEFINE(FTY_EXPIRATION_HAVE_ANDROID, 1, [Have Android OS])
-                fty_expiration_on_android="yes"
+                AC_DEFINE(FTY_WARRANTY_HAVE_ANDROID, 1, [Have Android OS])
+                fty_warranty_on_android="yes"
             ;;
         esac
         ;;
@@ -799,74 +799,74 @@ case "${host_os}" in
         CPPFLAGS="-D_PTHREADS $CPPFLAGS"
         # Allow definitions of common OS-provided functions that are not in old standards
         CPPFLAGS="-D__EXTENSIONS__ $CPPFLAGS"
-        AC_DEFINE(FTY_EXPIRATION_HAVE_SOLARIS, 1, [Have Solaris OS])
+        AC_DEFINE(FTY_WARRANTY_HAVE_SOLARIS, 1, [Have Solaris OS])
         CFLAGS="${CFLAGS} -lsocket -lssp"
         ;;
     *freebsd*)
         # Define on FreeBSD to enable all library features
         CPPFLAGS="-D__BSD_VISIBLE $CPPFLAGS"
-        AC_DEFINE(FTY_EXPIRATION_HAVE_FREEBSD, 1, [Have FreeBSD OS])
+        AC_DEFINE(FTY_WARRANTY_HAVE_FREEBSD, 1, [Have FreeBSD OS])
         ;;
     *darwin*)
         # Define on Darwin to enable all library features
         CPPFLAGS="-D_DARWIN_C_SOURCE $CPPFLAGS"
-        AC_DEFINE(FTY_EXPIRATION_HAVE_OSX, 1, [Have DarwinOSX OS])
+        AC_DEFINE(FTY_WARRANTY_HAVE_OSX, 1, [Have DarwinOSX OS])
         ;;
     *netbsd*)
         # Define on NetBSD to enable all library features
         CPPFLAGS="-D_NETBSD_SOURCE $CPPFLAGS"
-        AC_DEFINE(FTY_EXPIRATION_HAVE_NETBSD, 1, [Have NetBSD OS])
+        AC_DEFINE(FTY_WARRANTY_HAVE_NETBSD, 1, [Have NetBSD OS])
         ;;
     *openbsd*)
         # Define on OpenBSD to enable all library features
         CPPFLAGS="-D_BSD_SOURCE $CPPFLAGS"
-        AC_DEFINE(FTY_EXPIRATION_HAVE_OPENBSD, 1, [Have OpenBSD OS])
+        AC_DEFINE(FTY_WARRANTY_HAVE_OPENBSD, 1, [Have OpenBSD OS])
         ;;
     *nto-qnx*)
-        AC_DEFINE(FTY_EXPIRATION_HAVE_QNXNTO, 1, [Have QNX Neutrino OS])
+        AC_DEFINE(FTY_WARRANTY_HAVE_QNXNTO, 1, [Have QNX Neutrino OS])
         ;;
     *aix*)
-        AC_DEFINE(FTY_EXPIRATION_HAVE_AIX, 1, [Have AIX OS])
+        AC_DEFINE(FTY_WARRANTY_HAVE_AIX, 1, [Have AIX OS])
         ;;
     *hpux*)
         # Define on HP-UX to enable all library features
         CPPFLAGS="-D_POSIX_C_SOURCE=200112L"
-        AC_DEFINE(FTY_EXPIRATION_HAVE_HPUX, 1, [Have HPUX OS])
+        AC_DEFINE(FTY_WARRANTY_HAVE_HPUX, 1, [Have HPUX OS])
         ;;
     *mingw32*)
         # Disable format error due to incomplete ANSI C
         CFLAGS="-Wno-error=format -Wno-unused-function -Wno-unused-variable -D_XOPEN_SOURCE $CFLAGS"
         CPPFLAGS="-Wno-error=format -Wno-unused-function -Wno-unused-variable -D_XOPEN_SOURCE $CPPFLAGS"
-        AC_DEFINE(FTY_EXPIRATION_HAVE_WINDOWS, 1, [Have Windows OS])
-        AC_DEFINE(FTY_EXPIRATION_HAVE_MINGW32, 1, [Have MinGW32])
+        AC_DEFINE(FTY_WARRANTY_HAVE_WINDOWS, 1, [Have Windows OS])
+        AC_DEFINE(FTY_WARRANTY_HAVE_MINGW32, 1, [Have MinGW32])
         AC_CHECK_HEADERS(windows.h)
-        fty_expiration_on_mingw32="yes"
-        fty_expiration_install_man="no"
+        fty_warranty_on_mingw32="yes"
+        fty_warranty_install_man="no"
         ;;
     *mingw64*)
         # Define on MINGW64 to enable all libeary features
         # Disable format error due to incomplete ANSI C
         CFLAGS="-Wno-error=format -Wno-unused-function -Wno-unused-variable -D_XOPEN_SOURCE $CFLAGS"
         CPPFLAGS="-Wno-error=format -Wno-unused-function -Wno-unused-variable -D_XOPEN_SOURCE $CPPFLAGS"
-        AC_DEFINE(FTY_EXPIRATION_HAVE_WINDOWS, 1, [Have Windows OS])
-        AC_DEFINE(FTY_EXPIRATION_HAVE_MINGW32, 1, [Have MinGW32])
+        AC_DEFINE(FTY_WARRANTY_HAVE_WINDOWS, 1, [Have Windows OS])
+        AC_DEFINE(FTY_WARRANTY_HAVE_MINGW32, 1, [Have MinGW32])
         AC_CHECK_HEADERS(windows.h)
-        fty_expiration_on_mingw32="yes"
-        fty_expiration_install_man="no"
+        fty_warranty_on_mingw32="yes"
+        fty_warranty_install_man="no"
         ;;
     *cygwin*)
         # Define on Cygwin to enable all library features
         CPPFLAGS="-D_GNU_SOURCE $CPPFLAGS"
-        AC_DEFINE(FTY_EXPIRATION_HAVE_CYGWIN, 1, [Have Cygwin])
-        fty_expiration_on_cygwin="yes"
+        AC_DEFINE(FTY_WARRANTY_HAVE_CYGWIN, 1, [Have Cygwin])
+        fty_warranty_on_cygwin="yes"
         ;;
     gnu*)
         # Define on GNU/Hurd to enable all library features
         if test "x$GXX" = "xyes"; then
             CPPFLAGS="-D_GNU_SOURCE $CPPFLAGS"
         fi
-        AC_DEFINE(FTY_EXPIRATION_HAVE_GNU, 1, [Have GNU/Hurd OS])
-        fty_expiration_on_gnu="yes"
+        AC_DEFINE(FTY_WARRANTY_HAVE_GNU, 1, [Have GNU/Hurd OS])
+        fty_warranty_on_gnu="yes"
         ;;
     *)
         AC_MSG_ERROR([unsupported system: ${host_os}])
@@ -903,13 +903,13 @@ if test "x$GCC" = "xyes"; then
 fi
 
 AM_CONDITIONAL(ENABLE_SHARED, test "x$enable_shared" = "xyes")
-AM_CONDITIONAL(ON_MINGW, test "x$fty_expiration_on_mingw32" = "xyes")
-AM_CONDITIONAL(ON_CYGWIN, test "x$fty_expiration_on_cygwin" = "xyes")
-AM_CONDITIONAL(ON_ANDROID, test "x$fty_expiration_on_android" = "xyes")
-AM_CONDITIONAL(ON_LINUX, test "x$fty_expiration_on_linux" = "xyes")
-AM_CONDITIONAL(ON_GNU, test "x$fty_expiration_on_gnu" = "xyes")
-AM_CONDITIONAL(INSTALL_MAN, test "x$fty_expiration_install_man" = "xyes")
-AM_CONDITIONAL(BUILD_DOC, test "x$fty_expiration_build_doc" = "xyes")
+AM_CONDITIONAL(ON_MINGW, test "x$fty_warranty_on_mingw32" = "xyes")
+AM_CONDITIONAL(ON_CYGWIN, test "x$fty_warranty_on_cygwin" = "xyes")
+AM_CONDITIONAL(ON_ANDROID, test "x$fty_warranty_on_android" = "xyes")
+AM_CONDITIONAL(ON_LINUX, test "x$fty_warranty_on_linux" = "xyes")
+AM_CONDITIONAL(ON_GNU, test "x$fty_warranty_on_gnu" = "xyes")
+AM_CONDITIONAL(INSTALL_MAN, test "x$fty_warranty_install_man" = "xyes")
+AM_CONDITIONAL(BUILD_DOC, test "x$fty_warranty_build_doc" = "xyes")
 
 AC_ARG_ENABLE([dist_cmakefiles],
     AS_HELP_STRING([--enable-dist_cmakefiles],
@@ -924,15 +924,15 @@ fi
      AC_MSG_RESULT([$enable_dist_cmakefiles])])
 AM_CONDITIONAL(ENABLE_DIST_CMAKEFILES, test "x$enable_dist_cmakefiles" = "xyes")
 
-# Check for warranty-metric intent
-AC_ARG_ENABLE([warranty-metric],
-    AS_HELP_STRING([--enable-warranty-metric],
-        [Compile and install 'warranty-metric' [default=yes]]),
-    [enable_warranty_metric=$enableval],
-    [enable_warranty_metric=yes])
+# Check for biostimer-warranty-metric intent
+AC_ARG_ENABLE([biostimer-warranty-metric],
+    AS_HELP_STRING([--enable-biostimer-warranty-metric],
+        [Compile and install 'biostimer-warranty-metric' [default=yes]]),
+    [enable_biostimer_warranty_metric=$enableval],
+    [enable_biostimer_warranty_metric=yes])
 
-AM_CONDITIONAL([ENABLE_WARRANTY_METRIC], [test x$enable_warranty_metric != xno])
-AM_COND_IF([ENABLE_WARRANTY_METRIC], [AC_MSG_NOTICE([ENABLE_WARRANTY_METRIC defined])])
+AM_CONDITIONAL([ENABLE_BIOSTIMER_WARRANTY_METRIC], [test x$enable_biostimer_warranty_metric != xno])
+AM_COND_IF([ENABLE_BIOSTIMER_WARRANTY_METRIC], [AC_MSG_NOTICE([ENABLE_BIOSTIMER_WARRANTY_METRIC defined])])
 
 # Checks for library functions.
 AC_TYPE_SIGNAL
@@ -974,8 +974,8 @@ AM_CONDITIONAL([ENABLE_DRAFTS], [test x$enable_drafts != xno])
 
 if test "x$enable_drafts" = "xyes"; then
     AC_MSG_NOTICE([Building stable and legacy API + draft API])
-    AC_DEFINE(FTY_EXPIRATION_BUILD_DRAFT_API, 1, [Provide draft classes and methods])
-    AC_SUBST(pkg_config_defines, "-DFTY_EXPIRATION_BUILD_DRAFT_API=1")
+    AC_DEFINE(FTY_WARRANTY_BUILD_DRAFT_API, 1, [Provide draft classes and methods])
+    AC_SUBST(pkg_config_defines, "-DFTY_WARRANTY_BUILD_DRAFT_API=1")
 else
     AC_MSG_NOTICE([Building stable and legacy API (no draft API)])
     AC_SUBST(pkg_config_defines, "")
@@ -1010,13 +1010,13 @@ AS_IF([test "x$enable_Werror" = "xyes" || test "x$enable_Werror" = "xauto"],
 
 # Specify output files
 AC_CONFIG_FILES([Makefile
-                 src/warranty-metric.cfg
+                 src/biostimer-warranty-metric.cfg
                 ])
 
 AM_COND_IF([WITH_SYSTEMD_UNITS],
     [AC_CONFIG_FILES([
-                 src/warranty-metric.service
-                 src/warranty-metric.timer
+                 src/biostimer-warranty-metric.service
+                 src/biostimer-warranty-metric.timer
     ])],
     [])
 
@@ -1058,12 +1058,12 @@ echo C++ compiler.................. : $CXX
 echo C++ compiler flags............ : $CXXFLAGS
 echo Configure date................ : $BUILD_DATE
 echo Build architecture............ : $BUILD_ARCH
-echo Build docs.................... : $fty_expiration_build_doc
+echo Build docs.................... : $fty_warranty_build_doc
 echo Build host.................... : $BUILD_HOST
 echo Build user.................... : $USER
 echo Draft API..................... : $enable_drafts
 echo Install dir................... : $prefix
-echo Install man pages............. : $fty_expiration_install_man
+echo Install man pages............. : $fty_warranty_install_man
 
 echo
 echo Help:

@@ -1,5 +1,5 @@
 #
-#    fty-expiration - Agent sending metrics about warranty expiration
+#    fty-warranty - Agent sending metrics about warranty expiration
 #
 #    Copyright (C) 2014 - 2017 Eaton                                        
 #                                                                           
@@ -29,7 +29,7 @@
 %define DRAFTS no
 %endif
 %define SYSTEMD_UNIT_DIR %(pkg-config --variable=systemdsystemunitdir systemd)
-Name:           fty-expiration
+Name:           fty-warranty
 Version:        1.0.0
 Release:        1
 Summary:        agent sending metrics about warranty expiration
@@ -61,7 +61,7 @@ BuildRequires:  tntdb-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 
 %description
-fty-expiration agent sending metrics about warranty expiration.
+fty-warranty agent sending metrics about warranty expiration.
 
 
 %prep
@@ -82,19 +82,19 @@ find %{buildroot} -name '*.la' | xargs rm -f
 
 %files
 %defattr(-,root,root)
-%{_bindir}/warranty-metric
-%{_mandir}/man1/warranty-metric*
-%config(noreplace) %{_sysconfdir}/fty-expiration/warranty-metric.cfg
-%{SYSTEMD_UNIT_DIR}/warranty-metric.service
-%{SYSTEMD_UNIT_DIR}/warranty-metric.timer
-%dir %{_sysconfdir}/fty-expiration
+%{_bindir}/biostimer-warranty-metric
+%{_mandir}/man1/biostimer-warranty-metric*
+%config(noreplace) %{_sysconfdir}/fty-warranty/biostimer-warranty-metric.cfg
+%{SYSTEMD_UNIT_DIR}/biostimer-warranty-metric.service
+%{SYSTEMD_UNIT_DIR}/biostimer-warranty-metric.timer
+%dir %{_sysconfdir}/fty-warranty
 %if 0%{?suse_version} > 1315
 %post
-%systemd_post warranty-metric.service warranty-metric.timer
+%systemd_post biostimer-warranty-metric.service biostimer-warranty-metric.timer
 %preun
-%systemd_preun warranty-metric.service warranty-metric.timer
+%systemd_preun biostimer-warranty-metric.service biostimer-warranty-metric.timer
 %postun
-%systemd_postun_with_restart warranty-metric.service warranty-metric.timer
+%systemd_postun_with_restart biostimer-warranty-metric.service biostimer-warranty-metric.timer
 %endif
 
 %changelog

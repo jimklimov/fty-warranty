@@ -1,11 +1,11 @@
 <project
-    name = "fty-expiration"
+    name = "fty-warranty"
     description = "Agent sending metrics about warranty expiration"
     script = "zproject.gsl"
     email = "EatonIPCOpenSource@eaton.com"
     url = "https://42ity.org"
     license = "GPL-2.0+"
-    repository = "https://github.com/42ity/fty-expiration"
+    repository = "https://github.com/42ity/fty-warranty"
     >
 
     <target name = "debian" />
@@ -60,7 +60,7 @@
     <!-- use project = "tntdb" test="tntdb::Date::gmtime" header="tntdb/connect.h" / -->
 
     <!--<main name = "warranty-metric">-->
-    <main name = "warranty-metric" service = "1" timer = "1" >
+    <main name = "biostimer-warranty-metric" service = "1" timer = "1" >
         Agent sending metrics about warranty expiration
     </main>
 

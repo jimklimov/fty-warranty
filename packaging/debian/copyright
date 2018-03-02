@@ -1,9 +1,9 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: fty-expiration
+Upstream-Name: fty-warranty
 
 Files: *
-Copyright: 2015- fty-expiration Developers <eatonipcopensource@eaton.com>
-License: fty-expiration_license
+Copyright: 2015- fty-warranty Developers <eatonipcopensource@eaton.com>
+License: fty-warranty_license
  Copyright (C) 2014 - 2017 Eaton                                        
  .                                                                      
  This program is free software; you can redistribute it and/or modify   

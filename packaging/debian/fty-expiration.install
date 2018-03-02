@@ -1,5 +1,0 @@
-usr/bin/warranty-metric
-etc/fty-expiration/warranty-metric.cfg
-lib/systemd/system/warranty-metric.service
-/usr/lib/systemd/system/warranty-metric.timer
-

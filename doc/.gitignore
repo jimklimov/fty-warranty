@@ -11,8 +11,8 @@
 *.xml7
 
 # Ignore the source doc texts generated from program sources
-warranty-metric.txt
-warranty-metric.doc
+biostimer-warranty-metric.txt
+biostimer-warranty-metric.doc
 
 # Make sure to track the manually maintained project description
 !*.adoc

@@ -22,7 +22,7 @@ save.xml
 
 # Executables
 src/fty-expiration_selftest
-src/warranty-metric
+src/biostimer-warranty-metric
 *.exe
 *.out
 *.app
@@ -131,3 +131,17 @@ bindings/qt/selftest/selftest
 
 # editor backups
 *~
+
+# cmake
+CMakeLists.tx
+Findcxxtools.cmake
+Findczmq.cmake
+Findfty_proto.cmake
+Findlibsodium.cmake
+Findlibzmq.cmake
+Findmalamute.cmake
+Findtntdb.cmake
+
+# systemd .in templates
+!src/biostimer-warranty-metric.service.in
+!src/biostimer-warranty-metric.timer.in

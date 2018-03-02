@@ -13,19 +13,19 @@ if WITH_SYSTEMD_UNITS
 systemdsystemunit_DATA =
 endif #WITH_SYSTEMD_UNITS
 
-if ENABLE_WARRANTY_METRIC
-bin_PROGRAMS += src/warranty-metric
-src_warranty_metric_CPPFLAGS = ${AM_CPPFLAGS}
-src_warranty_metric_LDADD = ${program_libs}
-src_warranty_metric_SOURCES = src/warranty_metric.cc
-src_warranty_metric_config_DATA =
-src_warranty_metric_config_DATA += src/warranty-metric.cfg
-src_warranty_metric_configdir = $(sysconfdir)/fty-expiration
+if ENABLE_BIOSTIMER_WARRANTY_METRIC
+bin_PROGRAMS += src/biostimer-warranty-metric
+src_biostimer_warranty_metric_CPPFLAGS = ${AM_CPPFLAGS}
+src_biostimer_warranty_metric_LDADD = ${program_libs}
+src_biostimer_warranty_metric_SOURCES = src/biostimer_warranty_metric.cc
+src_biostimer_warranty_metric_config_DATA =
+src_biostimer_warranty_metric_config_DATA += src/biostimer-warranty-metric.cfg
+src_biostimer_warranty_metric_configdir = $(sysconfdir)/fty-warranty
 if WITH_SYSTEMD_UNITS
-systemdsystemunit_DATA += src/warranty-metric.service
-systemdsystemunit_DATA += src/warranty-metric.timer
+systemdsystemunit_DATA += src/biostimer-warranty-metric.service
+systemdsystemunit_DATA += src/biostimer-warranty-metric.timer
 endif #WITH_SYSTEMD_UNITS
-endif #ENABLE_WARRANTY_METRIC
+endif #ENABLE_BIOSTIMER_WARRANTY_METRIC
 
 
 # Directories with test fixtures optionally provided by the project,
@@ -88,74 +88,74 @@ check-empty-selftest-rw:
 		else true ; fi; \
 	else true ; fi
 
-check-local: src/fty_expiration_selftest $(abs_top_builddir)/$(SELFTEST_DIR_RW) $(abs_top_builddir)/$(SELFTEST_DIR_RO)
-	$(LIBTOOL) --mode=execute $(builddir)/src/fty_expiration_selftest
+check-local: src/fty_warranty_selftest $(abs_top_builddir)/$(SELFTEST_DIR_RW) $(abs_top_builddir)/$(SELFTEST_DIR_RO)
+	$(LIBTOOL) --mode=execute $(builddir)/src/fty_warranty_selftest
 	$(MAKE) check-empty-selftest-rw
 
-check-verbose: src/fty_expiration_selftest $(abs_top_builddir)/$(SELFTEST_DIR_RW) $(abs_top_builddir)/$(SELFTEST_DIR_RO)
-	$(LIBTOOL) --mode=execute $(builddir)/src/fty_expiration_selftest -v
+check-verbose: src/fty_warranty_selftest $(abs_top_builddir)/$(SELFTEST_DIR_RW) $(abs_top_builddir)/$(SELFTEST_DIR_RO)
+	$(LIBTOOL) --mode=execute $(builddir)/src/fty_warranty_selftest -v
 	$(MAKE) check-empty-selftest-rw
 
 # Run the selftest binary under valgrind to check for memory leaks
-memcheck: src/fty_expiration_selftest $(abs_top_builddir)/$(SELFTEST_DIR_RW) $(abs_top_builddir)/$(SELFTEST_DIR_RO)
+memcheck: src/fty_warranty_selftest $(abs_top_builddir)/$(SELFTEST_DIR_RW) $(abs_top_builddir)/$(SELFTEST_DIR_RO)
 	$(LIBTOOL) --mode=execute valgrind --tool=memcheck \
 		--leak-check=full --show-reachable=yes --error-exitcode=1 \
 		--suppressions=$(srcdir)/src/.valgrind.supp \
 		$(VALGRIND_OPTIONS) \
-		$(builddir)/src/fty_expiration_selftest
+		$(builddir)/src/fty_warranty_selftest
 	$(MAKE) check-empty-selftest-rw
 
-memcheck-verbose: src/fty_expiration_selftest $(abs_top_builddir)/$(SELFTEST_DIR_RW) $(abs_top_builddir)/$(SELFTEST_DIR_RO)
+memcheck-verbose: src/fty_warranty_selftest $(abs_top_builddir)/$(SELFTEST_DIR_RW) $(abs_top_builddir)/$(SELFTEST_DIR_RO)
 	$(LIBTOOL) --mode=execute valgrind --tool=memcheck \
 		--leak-check=full --show-reachable=yes --error-exitcode=1 \
 		--suppressions=$(srcdir)/src/.valgrind.supp \
 		$(VALGRIND_OPTIONS) \
-		$(builddir)/src/fty_expiration_selftest -v
+		$(builddir)/src/fty_warranty_selftest -v
 	$(MAKE) check-empty-selftest-rw
 
 # Run the selftest binary under valgrind to check for performance leaks
-callcheck: src/fty_expiration_selftest $(abs_top_builddir)/$(SELFTEST_DIR_RW) $(abs_top_builddir)/$(SELFTEST_DIR_RO)
+callcheck: src/fty_warranty_selftest $(abs_top_builddir)/$(SELFTEST_DIR_RW) $(abs_top_builddir)/$(SELFTEST_DIR_RO)
 	$(LIBTOOL) --mode=execute valgrind --tool=callgrind \
 		$(VALGRIND_OPTIONS) \
-		$(builddir)/src/fty_expiration_selftest
+		$(builddir)/src/fty_warranty_selftest
 	$(MAKE) check-empty-selftest-rw
 
-callcheck-verbose: src/fty_expiration_selftest $(abs_top_builddir)/$(SELFTEST_DIR_RW) $(abs_top_builddir)/$(SELFTEST_DIR_RO)
+callcheck-verbose: src/fty_warranty_selftest $(abs_top_builddir)/$(SELFTEST_DIR_RW) $(abs_top_builddir)/$(SELFTEST_DIR_RO)
 	$(LIBTOOL) --mode=execute valgrind --tool=callgrind \
 		$(VALGRIND_OPTIONS) \
-		$(builddir)/src/fty_expiration_selftest -v
+		$(builddir)/src/fty_warranty_selftest -v
 	$(MAKE) check-empty-selftest-rw
 
 # Run the selftest binary under gdb for debugging
-debug: src/fty_expiration_selftest $(abs_top_builddir)/$(SELFTEST_DIR_RW) $(abs_top_builddir)/$(SELFTEST_DIR_RO)
+debug: src/fty_warranty_selftest $(abs_top_builddir)/$(SELFTEST_DIR_RW) $(abs_top_builddir)/$(SELFTEST_DIR_RO)
 	$(LIBTOOL) --mode=execute gdb -q \
-		$(builddir)/src/fty_expiration_selftest
+		$(builddir)/src/fty_warranty_selftest
 	$(MAKE) check-empty-selftest-rw
 
-debug-verbose: src/fty_expiration_selftest $(abs_top_builddir)/$(SELFTEST_DIR_RW) $(abs_top_builddir)/$(SELFTEST_DIR_RO)
+debug-verbose: src/fty_warranty_selftest $(abs_top_builddir)/$(SELFTEST_DIR_RW) $(abs_top_builddir)/$(SELFTEST_DIR_RO)
 	$(LIBTOOL) --mode=execute gdb -q \
-		$(builddir)/src/fty_expiration_selftest -v
+		$(builddir)/src/fty_warranty_selftest -v
 	$(MAKE) check-empty-selftest-rw
 
 # Run the selftest binary with verbose switch for tracing
-animate: src/fty_expiration_selftest $(abs_top_builddir)/$(SELFTEST_DIR_RW) $(abs_top_builddir)/$(SELFTEST_DIR_RO)
-	$(LIBTOOL) --mode=execute $(builddir)/src/fty_expiration_selftest -v
+animate: src/fty_warranty_selftest $(abs_top_builddir)/$(SELFTEST_DIR_RW) $(abs_top_builddir)/$(SELFTEST_DIR_RO)
+	$(LIBTOOL) --mode=execute $(builddir)/src/fty_warranty_selftest -v
 	$(MAKE) check-empty-selftest-rw
 
 animate-verbose: animate
 
 if WITH_GCOV
-coverage: src/fty_expiration_selftest $(abs_top_builddir)/$(SELFTEST_DIR_RW) $(abs_top_builddir)/$(SELFTEST_DIR_RO)
+coverage: src/fty_warranty_selftest $(abs_top_builddir)/$(SELFTEST_DIR_RW) $(abs_top_builddir)/$(SELFTEST_DIR_RO)
 	@echo "you had called configure --with-gcov"
 	lcov --base-directory . --directory . --zerocounters -q
 	$(MAKE) check
 	lcov --base-directory . --directory . --capture -o coverage.info
 	lcov --remove coverage.info "/usr*" -o coverage.info
-	lcov --remove coverage.info "fty_expiration_selftest.cc" -o coverage.info
+	lcov --remove coverage.info "fty_warranty_selftest.cc" -o coverage.info
 	$(RM) -rf coverage/*
-	genhtml -o coverage/ -t "fty-expiration test coverage" --num-spaces 4 coverage.info
+	genhtml -o coverage/ -t "fty-warranty test coverage" --num-spaces 4 coverage.info
 else
-coverage: src/fty_expiration_selftest
+coverage: src/fty_warranty_selftest
 	@echo "call make clean && configure --with-gcov to enable code coverage"
 	@exit 1
 endif

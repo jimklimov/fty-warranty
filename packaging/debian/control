@@ -1,5 +1,5 @@
 #
-#    fty-expiration - Agent sending metrics about warranty expiration
+#    fty-warranty - Agent sending metrics about warranty expiration
 #
 #    Copyright (C) 2014 - 2017 Eaton                                        
 #                                                                           
@@ -17,10 +17,10 @@
 #    with this program; if not, write to the Free Software Foundation, Inc.,
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.            
 
-Source:         fty-expiration
+Source:         fty-warranty
 Section:        net
 Priority:       optional
-Maintainer:     fty-expiration Developers <eatonipcopensource@eaton.com>
+Maintainer:     fty-warranty Developers <eatonipcopensource@eaton.com>
 Standards-Version: 4.0.1.0
 Build-Depends: debhelper (>= 9),
     pkg-config,
@@ -37,20 +37,20 @@ Build-Depends: debhelper (>= 9),
     dh-autoreconf
 
 
-Package: fty-expiration
+Package: fty-warranty
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
-Description: runnable binaries from fty-expiration
- Main package for fty-expiration:
+Description: runnable binaries from fty-warranty
+ Main package for fty-warranty:
  agent sending metrics about warranty expiration
 
-Package: fty-expiration-dbg
+Package: fty-warranty-dbg
 Architecture: any
 Section: debug
 Priority: optional
 Depends:
-    fty-expiration (= ${binary:Version}),
+    fty-warranty (= ${binary:Version}),
     ${misc:Depends}
-Description: fty-expiration debugging symbols
- This package contains the debugging symbols for fty-expiration:
+Description: fty-warranty debugging symbols
+ This package contains the debugging symbols for fty-warranty:
  agent sending metrics about warranty expiration.
