@@ -1,0 +1,6 @@
+LIBEXEC_DIRNAME=$(prefix)/libexec/
+WARRANTY_BASENAME=biostimer-warranty-metric
+
+install-exec-hook:
+	mkdir -p $(DESTDIR)$(LIBEXEC_DIRNAME) && \
+	mv -f $(DESTDIR)$(bindir)/$(WARRANTY_BASENAME) $(DESTDIR)$(LIBEXEC_DIRNAME)
