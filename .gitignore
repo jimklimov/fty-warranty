@@ -21,7 +21,7 @@ save.xml
 *.lo
 
 # Executables
-src/fty-expiration_selftest
+src/fty-warranty_selftest
 src/biostimer-warranty-metric
 *.exe
 *.out
@@ -29,9 +29,9 @@ src/biostimer-warranty-metric
 core
 
  # Distcheck workspace and archives
-fty-expiration-1.0.0/
-fty-expiration-1.0.0.tar.gz
-fty-expiration-1.0.0.zip
+fty-warranty-1.0.0/
+fty-warranty-1.0.0.tar.gz
+fty-warranty-1.0.0.zip
 
 # Man pages
 doc/*.1

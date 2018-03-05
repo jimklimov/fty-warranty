@@ -969,6 +969,16 @@ AC_ARG_ENABLE([biostimer-warranty-metric],
 AM_CONDITIONAL([ENABLE_BIOSTIMER_WARRANTY_METRIC], [test x$enable_biostimer_warranty_metric != xno])
 AM_COND_IF([ENABLE_BIOSTIMER_WARRANTY_METRIC], [AC_MSG_NOTICE([ENABLE_BIOSTIMER_WARRANTY_METRIC defined])])
 
+# Check for fty_warranty_selftest intent
+AC_ARG_ENABLE([fty_warranty_selftest],
+    AS_HELP_STRING([--enable-fty_warranty_selftest],
+        [Compile 'fty_warranty_selftest' in src [default=yes]]),
+    [enable_fty_warranty_selftest=$enableval],
+    [enable_fty_warranty_selftest=yes])
+
+AM_CONDITIONAL([ENABLE_FTY_WARRANTY_SELFTEST], [test x$enable_fty_warranty_selftest != xno])
+AM_COND_IF([ENABLE_FTY_WARRANTY_SELFTEST], [AC_MSG_NOTICE([ENABLE_FTY_WARRANTY_SELFTEST defined])])
+
 # Checks for library functions.
 AC_TYPE_SIGNAL
 AC_CHECK_FUNCS(perror gettimeofday memset getifaddrs)
@@ -1045,8 +1055,11 @@ AS_IF([test "x$enable_Werror" = "xyes" || test "x$enable_Werror" = "xauto"],
 
 # Specify output files
 AC_CONFIG_FILES([Makefile
+                 doc/Makefile
+                 include/Makefile
+                 src/libfty_warranty.pc
                  src/biostimer-warranty-metric.cfg
-                ])
+                 ])
 
 AM_COND_IF([WITH_SYSTEMD_UNITS],
     [AC_CONFIG_FILES([
