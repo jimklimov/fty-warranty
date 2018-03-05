@@ -6,6 +6,11 @@ include_HEADERS = \
     fty_warranty.h \
     fty_warranty_library.h
 
+if ENABLE_DRAFTS
+include_HEADERS += \
+    fty_warranty.h
+
+endif
 
 
 ################################################################################
