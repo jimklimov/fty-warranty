@@ -28,10 +28,10 @@ AM_CPPFLAGS = \
 
 project_libs = ${libsodium_LIBS} ${libzmq_LIBS} ${czmq_LIBS} ${malamute_LIBS} ${fty_proto_LIBS} ${cxxtools_LIBS} ${tntdb_LIBS}
 
-SUBDIRS = 
-SUBDIRS += 
-DIST_SUBDIRS = 
-DIST_SUBDIRS += 
+SUBDIRS =
+SUBDIRS +=
+DIST_SUBDIRS =
+DIST_SUBDIRS +=
 
 lib_LTLIBRARIES =
 bin_PROGRAMS =
