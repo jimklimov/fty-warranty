@@ -1,3 +1,4 @@
+### Note: this file was customized for paths
 usr/libexec/biostimer-warranty-metric
 etc/fty-warranty/biostimer-warranty-metric.cfg
 lib/systemd/system/biostimer-warranty-metric.service
