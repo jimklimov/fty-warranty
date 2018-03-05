@@ -59,6 +59,11 @@
     <!-- use project = "tntdb" test="tntdb::connectCached" header="tntdb/connect.h" / -->
     <!-- use project = "tntdb" test="tntdb::Date::gmtime" header="tntdb/connect.h" / -->
 
+    <!-- Note: the added fty-warranty class is currently a dummy
+         to satisfy zproject expectations, but later the logic
+         might move into it -->
+    <class name = "fty-warranty" private = "1" selftest = "1" />
+
     <!--<main name = "warranty-metric">-->
     <main name = "biostimer-warranty-metric" service = "1" timer = "1" >
         Agent sending metrics about warranty expiration
