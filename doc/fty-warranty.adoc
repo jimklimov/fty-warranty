@@ -4,13 +4,13 @@ Name(7)
 
 NAME
 ----
-fty-expiration - Overview of Agent sending metrics about warranty expiration
+fty-warranty - Overview of Agent sending metrics about warranty expiration
 
 
 SYNOPSIS
 --------
 
-Project fty-expiration aims to ... (short marketing pitch)
+Project fty-warranty aims to ... (short marketing pitch)
 
 It delivers several programs with their respective man pages:
  warranty-metric.1
@@ -19,9 +19,9 @@ and public classes in a shared library:
 
 Generally you can compile and link against it like this:
 ----
-#include <fty_expiration.h>
+#include <fty_warranty.h>
 
-cc ['flags'] 'files' -lfty_expiration ['libraries']
+cc ['flags'] 'files' -lfty_warranty ['libraries']
 ----
 
 

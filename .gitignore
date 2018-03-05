@@ -133,7 +133,7 @@ bindings/qt/selftest/selftest
 *~
 
 # cmake
-CMakeLists.tx
+CMakeLists.txt
 Findcxxtools.cmake
 Findczmq.cmake
 Findfty_proto.cmake
@@ -141,6 +141,7 @@ Findlibsodium.cmake
 Findlibzmq.cmake
 Findmalamute.cmake
 Findtntdb.cmake
+builds/cmake/*
 
 # systemd .in templates
 !src/biostimer-warranty-metric.service.in

@@ -69,7 +69,7 @@ biostimer-warranty-metric.txt: $(top_srcdir)/src/biostimer_warranty_metric.cc
 	"$(srcdir)/mkman" "biostimer_warranty_metric" "$(builddir)/biostimer-warranty-metric.txt" "$(srcdir)/.."
 
 
-clean:
+clean-local:
 	rm -f *.1 *.3 *.7 $(GENERATED_DOCS)
 
 doc: $(GENERATED_DOCS)

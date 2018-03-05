@@ -60,6 +60,11 @@ PKG_PROG_PKG_CONFIG
 # Check endianess of the system
 AC_C_BIGENDIAN
 
+# See if cppcheck is in PATH; this variable unblocks the "cppcheck" recipe
+# (note that "make cppcheck.xml" can be used - and perhaps fail - regardless)
+AC_CHECK_PROG([WITH_CPPCHECK], [cppcheck], [true], [false])
+AM_CONDITIONAL(WITH_CPPCHECK, $WITH_CPPCHECK)
+
 # Code coverage
 AC_MSG_CHECKING([whether to enable GCov])
 AC_ARG_WITH(gcov, [AS_HELP_STRING([--with-gcov=yes/no],
@@ -96,6 +101,19 @@ else
     AC_MSG_RESULT([no])
 fi
 
+# See if clang-format is in PATH; the result unblocks the relevant recipes
+WITH_CLANG_FORMAT=""
+AS_IF([test x"$CLANG_FORMAT" = x],
+    [AC_PATH_PROG([CLANG_FORMAT], [clang-format], [])],
+    [AC_CHECK_PROG([WITH_CLANG_FORMAT], [$CLANG_FORMAT], [true], [fail])])
+AS_IF([test x"$CLANG_FORMAT" != x && test x"$WITH_CLANG_FORMAT" = x],
+    [AS_IF([test -x "$CLANG_FORMAT"],
+        [WITH_CLANG_FORMAT=true],
+        [AC_CHECK_PROG([WITH_CLANG_FORMAT], [$CLANG_FORMAT], [true], [false])])])
+AS_IF([test "$WITH_CLANG_FORMAT" = fail],
+    [AC_MSG_ERROR([Caller explicitly referenced CLANG_FORMAT=$CLANG_FORMAT which was not found])])
+AM_CONDITIONAL([WITH_CLANG_FORMAT], [$WITH_CLANG_FORMAT])
+
 # Set pkgconfigdir
 AC_ARG_WITH([pkgconfigdir], AS_HELP_STRING([--with-pkgconfigdir=PATH],
     [Path to the pkgconfig directory [[LIBDIR/pkgconfig]]]),
@@ -131,7 +149,9 @@ AC_ARG_WITH([libsodium],
     [
         search_libsodium="yes"
     ],
-    [])
+    [
+        search_libsodium="yes"
+    ])
 AS_CASE([x"${with_libsodium}"],
     [xyes], [search_libsodium="yes"],
     [xno],  [search_libsodium="no"])
@@ -218,7 +238,9 @@ AC_ARG_WITH([libzmq],
     [
         search_libzmq="yes"
     ],
-    [])
+    [
+        search_libzmq="yes"
+    ])
 AS_CASE([x"${with_libzmq}"],
     [xyes], [search_libzmq="yes"],
     [xno],  [search_libzmq="no"])
@@ -305,7 +327,9 @@ AC_ARG_WITH([libczmq],
     [
         search_libczmq="yes"
     ],
-    [])
+    [
+        search_libczmq="yes"
+    ])
 AS_CASE([x"${with_libczmq}"],
     [xyes], [search_libczmq="yes"],
     [xno],  [search_libczmq="no"])
@@ -392,7 +416,9 @@ AC_ARG_WITH([libmlm],
     [
         search_libmlm="yes"
     ],
-    [])
+    [
+        search_libmlm="yes"
+    ])
 AS_CASE([x"${with_libmlm}"],
     [xyes], [search_libmlm="yes"],
     [xno],  [search_libmlm="no"])
@@ -479,7 +505,9 @@ AC_ARG_WITH([libfty_proto],
     [
         search_libfty_proto="yes"
     ],
-    [])
+    [
+        search_libfty_proto="yes"
+    ])
 AS_CASE([x"${with_libfty_proto}"],
     [xyes], [search_libfty_proto="yes"],
     [xno],  [search_libfty_proto="no"])
@@ -566,7 +594,9 @@ AC_ARG_WITH([cxxtools],
     [
         search_cxxtools="yes"
     ],
-    [])
+    [
+        search_cxxtools="yes"
+    ])
 AS_CASE([x"${with_cxxtools}"],
     [xyes], [search_cxxtools="yes"],
     [xno],  [search_cxxtools="no"])
@@ -653,7 +683,9 @@ AC_ARG_WITH([tntdb],
     [
         search_tntdb="yes"
     ],
-    [])
+    [
+        search_tntdb="yes"
+    ])
 AS_CASE([x"${with_tntdb}"],
     [xyes], [search_tntdb="yes"],
     [xno],  [search_tntdb="no"])
@@ -762,6 +794,9 @@ else
     AC_CHECK_PROG(fty_warranty_have_asciidoc, asciidoc, yes, no)
     AC_CHECK_PROG(fty_warranty_have_xmlto, xmlto, yes, no)
     if test "x$fty_warranty_have_asciidoc" = "xno" -o "x$fty_warranty_have_xmlto" = "xno"; then
+        if test "x$with_docs" = "xyes" ; then
+            AC_MSG_ERROR([Build with docs was explicitly requested, but tools are not available])
+        fi
         fty_warranty_build_doc="no"
         # Tarballs built with 'make dist' ship with prebuilt documentation.
         if ! test -f doc/fty-warranty.7; then
@@ -1093,6 +1128,11 @@ echo "    - 'make memcheck'      run the project's selftest with valgrind to"
 echo "                           check for memory leaks"
 echo "    - 'make coverage'      generate project's selftest coverage report"
 echo "                           expects --with-gcov option for configure"
+echo "    - 'make clang-format-check'   check if project sources conform"
+echo "                           to style requirements"
+echo "    - 'make clang-format'         modify project sources to conform"
+echo "                           to style requirements"
+echo "    - 'make clang-format-diff'    modify as above and print 'git diff'"
 echo
 ])
 
