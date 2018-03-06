@@ -141,7 +141,6 @@ Findlibsodium.cmake
 Findlibzmq.cmake
 Findmalamute.cmake
 Findtntdb.cmake
-builds/cmake/*
 
 # systemd .in templates
 !src/biostimer-warranty-metric.service.in
