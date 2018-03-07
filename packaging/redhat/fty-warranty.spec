@@ -119,7 +119,9 @@ find %{buildroot} -name '*.la' | xargs rm -f
 
 %files
 %defattr(-,root,root)
-%{_bindir}/biostimer-warranty-metric
+# Note: legacy-dependency override of binary's path
+###%{_bindir}/biostimer-warranty-metric
+%{_libexecdir}/biostimer-warranty-metric
 %{_mandir}/man1/biostimer-warranty-metric*
 %config(noreplace) %{_sysconfdir}/fty-warranty/biostimer-warranty-metric.cfg
 %{SYSTEMD_UNIT_DIR}/biostimer-warranty-metric.service
