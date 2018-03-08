@@ -10,7 +10,7 @@ PartOf=bios.target
 [Service]
 Type=simple
 User=bios
-# TODO: Is it really a timer or an ordinary service? What is it intended to be? 
+# TODO: Is it really a timer or an ordinary service? What is it intended to be?
 #Restart=always
 EnvironmentFile=-@prefix@/share/bios/etc/default/bios
 EnvironmentFile=-@prefix@/share/bios/etc/default/bios__%n.conf
@@ -23,8 +23,7 @@ EnvironmentFile=-@sysconfdir@/default/fty__%n.conf
 Environment="prefix=@prefix@"
 EnvironmentFile=@sysconfdir@/default/bios-db-ro
 PermissionsStartOnly=true
-ExecStart=@LIBEXECDIR@/@PACKAGE@/warranty-metric
+ExecStart=/usr/libexec/biostimer-warranty-metric
 
 [Install]
 WantedBy=bios.target
-
