@@ -65,11 +65,12 @@
 #   define FTY_WARRANTY_EXPORT
 #   define FTY_WARRANTY_PRIVATE
 #else
-#   define FTY_WARRANTY_EXPORT
 #   if (defined __GNUC__ && __GNUC__ >= 4) || defined __INTEL_COMPILER
 #       define FTY_WARRANTY_PRIVATE __attribute__ ((visibility ("hidden")))
+#       define FTY_WARRANTY_EXPORT __attribute__ ((visibility ("default")))
 #   else
 #       define FTY_WARRANTY_PRIVATE
+#       define FTY_WARRANTY_EXPORT
 #   endif
 #endif
 
