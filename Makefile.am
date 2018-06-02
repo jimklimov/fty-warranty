@@ -8,11 +8,7 @@ DISTCHECK_CONFIGURE_FLAGS = \
 
 ACLOCAL_AMFLAGS = -I config
 
-AM_CFLAGS = \
-    -Werror=format-security
-
 AM_CXXFLAGS = \
-    -Werror=format-security \
     -std=c++11
 
 AM_CPPFLAGS = \
@@ -54,6 +50,9 @@ EXTRA_DIST += \
     Findfty_proto.cmake \
     Findcxxtools.cmake \
     Findtntdb.cmake \
+    builds/cmake/Modules/ClangFormat.cmake \
+    builds/cmake/clang-format-check.sh.in \
+    builds/cmake/Config.cmake.in \
     CMakeLists.txt
 endif
 

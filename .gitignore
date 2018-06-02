@@ -21,17 +21,18 @@ save.xml
 *.lo
 
 # Executables
-src/fty_warranty_selftest
+src/fty-warranty_selftest
 src/biostimer-warranty-metric
+src/fty_warranty_selftest
 *.exe
 *.out
 *.app
 core
 
- # Distcheck workspace and archives
-fty-warranty-1.0.0/
-fty-warranty-1.0.0.tar.gz
-fty-warranty-1.0.0.zip
+# Distcheck workspace and archives
+fty-warranty-*/
+fty-warranty-*.tar.gz
+fty-warranty-*.zip
 
 # Man pages
 doc/*.1
@@ -71,6 +72,11 @@ DartConfiguration.tcl
 install_manifest.txt
 Testing/
 
+# CMake in general
+builds/cmake/
+CMake*
+*.cmake
+
 # Repositories downloaded by CI integration scripts
 libsodium/
 libzmq/
@@ -107,7 +113,7 @@ src/app/gen/
 src/app/obj/
 src/app/local.properties
 
-# Android -dependencies
+# Android - dependencies
 src/app/jni/output
 
 # Python build directory
@@ -129,19 +135,14 @@ bindings/qt/selftest/selftest
 *.bak
 .test*
 
+# Netbeans directory
+nbproject/
+
 # editor backups
 *~
 
-# cmake
-CMakeLists.txt
-Findcxxtools.cmake
-Findczmq.cmake
-Findfty_proto.cmake
-Findlibsodium.cmake
-Findlibzmq.cmake
-Findmalamute.cmake
-Findtntdb.cmake
-
 # systemd .in templates
 !src/biostimer-warranty-metric.service.in
+src/biostimer-warranty-metric.service
 !src/biostimer-warranty-metric.timer.in
+src/biostimer-warranty-metric.timer
