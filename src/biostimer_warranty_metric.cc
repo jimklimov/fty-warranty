@@ -29,8 +29,12 @@
 //#include "fty_expiration_classes.h"
 #include <functional>
 #include <malamute.h>
+#include <fty_log.h>
 #include <fty_proto.h>
 #include <tntdb.h>
+
+#define NAME "warranty-metric"
+#define LOG_CONFIG "/etc/fty/ftylog.cfg"
 
 uint32_t TTL = 24*60*60;//[s]
 const char* MLM_ENDPOINT = "ipc://@/malamute";
@@ -83,7 +87,7 @@ select_asset_element_all_with_warranty_end(
  */
 int main (int argc, char *argv [])
 {
-
+    ManageFtyLog::setInstanceFtylog(NAME, LOG_CONFIG);
     mlm_client_t *client = mlm_client_new (); 
     assert (client);
 
@@ -106,7 +110,7 @@ int main (int argc, char *argv [])
 
                 char* ret = ::strptime (date.c_str(), "%Y-%m-%d", &tm_ewd);
                 if (ret == NULL) {
-                    zsys_error ("Cannot convert %s to date, skipping", date.c_str());
+                    log_error ("Cannot convert %s to date, skipping", date.c_str());
                     return;
                 }
 
@@ -121,9 +125,9 @@ int main (int argc, char *argv [])
 
                 // end_warranty_date (s) - now (s) -> to days
                 day_diff = std::ceil ((ewd - now) / (60*60*24));
-                zsys_debug ("day_diff: %d", day_diff);
+                log_debug ("day_diff: %d", day_diff);
             }
-            zsys_debug ("name: %s, keytag: %s, date: %s", name.c_str(), keytag.c_str(), date.c_str());
+            log_debug ("name: %s, keytag: %s, date: %s", name.c_str(), keytag.c_str(), date.c_str());
             zmsg_t *msg = fty_proto_encode_metric (
                     NULL,
                     ::time (NULL),
@@ -137,15 +141,15 @@ int main (int argc, char *argv [])
             mlm_client_send (client, subject.c_str (), &msg);
         };          
 
-    int r = mlm_client_connect (client, MLM_ENDPOINT, 1000, "warranty-metric");
+    int r = mlm_client_connect (client, MLM_ENDPOINT, 1000, NAME);
     if (r == -1) { 
-        zsys_error ("Can't connect to malamute");
+        log_error ("Can't connect to malamute");
         exit (EXIT_FAILURE);
     }
 
     r = mlm_client_set_producer (client, "METRICS");
     if (r == -1) { 
-        zsys_error ("Can't set producer to METRICS stream");
+        log_error ("Can't set producer to METRICS stream");
         exit (EXIT_FAILURE);
     }
 
@@ -153,7 +157,7 @@ int main (int argc, char *argv [])
     tntdb::Connection conn = tntdb::connectCached(url);
     r = select_asset_element_all_with_warranty_end (conn, cb);
     if (r == -1) {
-        zsys_error ("Error in element selection");
+        log_error ("Error in element selection");
         exit (EXIT_FAILURE);
     }
 
