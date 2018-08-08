@@ -86,6 +86,8 @@ libzmq/
 czmq/
 malamute/
 fty-proto/
+fty-common/
+fty-common-db/
 cxxtools/
 tntdb/
 

@@ -32,10 +32,11 @@
 //  External dependencies
 #include <czmq.h>
 #include <malamute.h>
-#include <ftyproto.h>
 #include <cxxtools/allocator.h>
 #include <tntdb.h>
 #include <fty_log.h>
+#include <ftyproto.h>
+#include <fty_common_db.h>
 
 //  FTY_WARRANTY version macros for compile-time API detection
 #define FTY_WARRANTY_VERSION_MAJOR 1
@@ -46,6 +47,7 @@
     ((major) * 10000 + (minor) * 100 + (patch))
 #define FTY_WARRANTY_VERSION \
     FTY_WARRANTY_MAKE_VERSION(FTY_WARRANTY_VERSION_MAJOR, FTY_WARRANTY_VERSION_MINOR, FTY_WARRANTY_VERSION_PATCH)
+
 
 #if defined (__WINDOWS__)
 #   if defined FTY_WARRANTY_STATIC
@@ -83,14 +85,14 @@
 //  These classes are stable or legacy and built in all releases
 //  Draft classes are by default not built in stable releases
 #ifdef FTY_WARRANTY_BUILD_DRAFT_API
-typedef struct _fty_warranty_t fty_warranty_t;
-#define FTY_WARRANTY_T_DEFINED
+typedef struct _ftywarranty_t ftywarranty_t;
+#define FTYWARRANTY_T_DEFINED
 #endif // FTY_WARRANTY_BUILD_DRAFT_API
 
 
 //  Public classes, each with its own header file
 #ifdef FTY_WARRANTY_BUILD_DRAFT_API
-#include "fty_warranty.h"
+#include "ftywarranty.h"
 #endif // FTY_WARRANTY_BUILD_DRAFT_API
 
 #ifdef FTY_WARRANTY_BUILD_DRAFT_API
