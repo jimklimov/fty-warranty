@@ -35,7 +35,7 @@
 #include <fty_common_db_asset.h>
 #include <fty_common_db_dbpath.h>
 #include <fty_common_str_defs.h>
-#include <fty_common.h>
+#include <fty_common_mlm_utils.h>
 
 #define NAME "warranty-metric"
 uint32_t TTL = 24*60*60;//[s]
