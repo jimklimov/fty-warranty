@@ -34,7 +34,6 @@
 #include <tntdb.h>
 #include <fty_common_db_asset.h>
 #include <fty_common_db_dbpath.h>
-#include <fty_common_str_defs.h>
 #include <fty_common_mlm_utils.h>
 
 #define NAME "warranty-metric"

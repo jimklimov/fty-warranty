@@ -37,6 +37,7 @@
 #include <fty_log.h>
 #include <ftyproto.h>
 #include <fty_common_db.h>
+#include <fty_common_mlm.h>
 
 //  FTY_WARRANTY version macros for compile-time API detection
 #define FTY_WARRANTY_VERSION_MAJOR 1
@@ -47,7 +48,6 @@
     ((major) * 10000 + (minor) * 100 + (patch))
 #define FTY_WARRANTY_VERSION \
     FTY_WARRANTY_MAKE_VERSION(FTY_WARRANTY_VERSION_MAJOR, FTY_WARRANTY_VERSION_MINOR, FTY_WARRANTY_VERSION_PATCH)
-
 
 #if defined (__WINDOWS__)
 #   if defined FTY_WARRANTY_STATIC
