@@ -1,5 +1,6 @@
 #
 #    fty-warranty - Agent sending metrics about warranty expiration
+# NOTE: This file was customized after generation, be sure to keep it
 #
 #    Copyright (C) 2014 - 2018 Eaton
 #
