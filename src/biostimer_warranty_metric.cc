@@ -35,6 +35,7 @@
 #include <fty_common_db_asset.h>
 #include <fty_common_db_dbpath.h>
 #include <fty_common_mlm_utils.h>
+#include <fty_shm.h>
 
 #define NAME "warranty-metric"
 uint32_t TTL = 24*60*60;//[s]
@@ -98,6 +99,7 @@ int main (int argc, char *argv [])
                     "day");
             assert (msg);
             std::string subject = keytag.append ("@").append (name);
+            fty::shm::write_metric(name, keytag, std::to_string(day_diff),"day", 3*TTL);
             mlm_client_send (client, subject.c_str (), &msg);
         };
 
