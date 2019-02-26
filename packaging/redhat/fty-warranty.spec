@@ -1,6 +1,5 @@
 #
 #    fty-warranty - Agent sending metrics about warranty expiration
-# NOTE: This file was customized after generation, be sure to keep it
 #
 #    Copyright (C) 2014 - 2018 Eaton
 #
@@ -65,6 +64,7 @@ BuildRequires:  fty-common-devel
 BuildRequires:  fty-common-db-devel
 BuildRequires:  openssl-devel
 BuildRequires:  fty-common-mlm-devel
+BuildRequires:  fty_shm-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 
 %description
@@ -101,6 +101,7 @@ Requires:       fty-common-devel
 Requires:       fty-common-db-devel
 Requires:       openssl-devel
 Requires:       fty-common-mlm-devel
+Requires:       fty_shm-devel
 
 %description devel
 agent sending metrics about warranty expiration development tools
@@ -132,9 +133,7 @@ find %{buildroot} -name '*.la' | xargs rm -f
 
 %files
 %defattr(-,root,root)
-# Note: legacy-dependency override of binary's path
-###%{_bindir}/biostimer-warranty-metric
-%{_libexecdir}/biostimer-warranty-metric
+%{_bindir}/biostimer-warranty-metric
 %{_mandir}/man1/biostimer-warranty-metric*
 %config(noreplace) %{_sysconfdir}/fty-warranty/biostimer-warranty-metric.cfg
 %{SYSTEMD_UNIT_DIR}/biostimer-warranty-metric.service

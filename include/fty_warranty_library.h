@@ -38,6 +38,7 @@
 #include <ftyproto.h>
 #include <fty_common_db.h>
 #include <fty_common_mlm.h>
+#include <fty_shm.h>
 
 //  FTY_WARRANTY version macros for compile-time API detection
 #define FTY_WARRANTY_VERSION_MAJOR 1

@@ -37,6 +37,7 @@ Build-Depends: debhelper (>= 9),
     libfty-common-db-dev,
     libssl-dev,
     libfty-common-mlm-dev,
+    libfty-shm-dev,
     systemd,
     dh-systemd,
     asciidoc-base | asciidoc, xmlto,
@@ -67,6 +68,7 @@ Depends:
     libfty-common-db-dev,
     libssl-dev,
     libfty-common-mlm-dev,
+    libfty-shm-dev,
     libfty-warranty1 (= ${binary:Version})
 Description: fty-warranty development tools
  This package contains development files for fty-warranty:
