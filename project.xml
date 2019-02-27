@@ -243,8 +243,12 @@
         </use>
     </use>
 
-    <use project = "fty_shm" libname = "libfty_shm" header="fty_shm.h" min_major = "1" test = "fty_shm_test" 
-	repository = "https://github.com/42ity/fty-shm.git"/>
+    <use project = "fty_shm" libname = "libfty_shm" header="fty_shm.h"
+        min_major = "1"
+        test = "fty_shm_test"
+        repository = "https://github.com/42ity/fty-shm.git"
+        release = "master"
+        />
 
     <!-- Note: the added fty-warranty class is currently a dummy
          to satisfy zproject expectations, but later the logic
