@@ -89,35 +89,12 @@ int main (int argc, char *argv [])
                 log_debug ("day_diff: %d", day_diff);
             }
             log_debug ("name: %s, keytag: %s, date: %s", name.c_str(), keytag.c_str(), date.c_str());
-            zmsg_t *msg = fty_proto_encode_metric (
-                    NULL,
-                    ::time (NULL),
-                    3 * TTL,
-                    keytag.c_str(),
-                    name.c_str (),
-                    std::to_string (day_diff).c_str(),
-                    "day");
-            assert (msg);
-            std::string subject = keytag.append ("@").append (name);
             fty::shm::write_metric(name, keytag, std::to_string(day_diff),"day", 3*TTL);
-            mlm_client_send (client, subject.c_str (), &msg);
         };
-
-    int r = mlm_client_connect (client, MLM_ENDPOINT, 1000, NAME);
-    if (r == -1) {
-        log_error ("Can't connect to malamute");
-        exit (EXIT_FAILURE);
-    }
-
-    r = mlm_client_set_producer (client, "METRICS");
-    if (r == -1) {
-        log_error ("Can't set producer to METRICS stream");
-        exit (EXIT_FAILURE);
-    }
 
     // unchecked errors with connection, the tool will fail otherwise
     tntdb::Connection conn = tntdb::connectCached(DBConn::url);
-    r = DBAssets::select_asset_element_all_with_warranty_end (conn, cb);
+    int r = DBAssets::select_asset_element_all_with_warranty_end (conn, cb);
     if (r == -1) {
         log_error ("Error in element selection");
         exit (EXIT_FAILURE);
@@ -125,7 +102,6 @@ int main (int argc, char *argv [])
 
     // to ensure all messages got published
     zclock_sleep (500);
-    mlm_client_destroy (&client);
 
     exit (EXIT_SUCCESS);
 }
