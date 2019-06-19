@@ -54,18 +54,18 @@ BuildRequires:  xmlto
 BuildRequires:  gcc-c++
 BuildRequires:  libsodium-devel
 BuildRequires:  zeromq-devel
-BuildRequires:  czmq-devel
-BuildRequires:  malamute-devel
+BuildRequires:  czmq-devel >= 3.0.2
+BuildRequires:  malamute-devel >= 1.0.0
 BuildRequires:  cxxtools-devel
 BuildRequires:  tntdb-devel
 BuildRequires:  log4cplus-devel
 BuildRequires:  fty-common-logging-devel
-BuildRequires:  fty-proto-devel
+BuildRequires:  fty-proto-devel >= 1.0.0
 BuildRequires:  fty-common-devel
 BuildRequires:  fty-common-db-devel
 BuildRequires:  openssl-devel
 BuildRequires:  fty-common-mlm-devel
-BuildRequires:  fty_shm-devel
+BuildRequires:  fty_shm-devel >= 1.0.0
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 
 %description
@@ -91,18 +91,18 @@ Group:          System/Libraries
 Requires:       libfty_warranty1 = %{version}
 Requires:       libsodium-devel
 Requires:       zeromq-devel
-Requires:       czmq-devel
-Requires:       malamute-devel
+Requires:       czmq-devel >= 3.0.2
+Requires:       malamute-devel >= 1.0.0
 Requires:       cxxtools-devel
 Requires:       tntdb-devel
 Requires:       log4cplus-devel
 Requires:       fty-common-logging-devel
-Requires:       fty-proto-devel
+Requires:       fty-proto-devel >= 1.0.0
 Requires:       fty-common-devel
 Requires:       fty-common-db-devel
 Requires:       openssl-devel
 Requires:       fty-common-mlm-devel
-Requires:       fty_shm-devel
+Requires:       fty_shm-devel >= 1.0.0
 
 %description devel
 agent sending metrics about warranty expiration development tools
@@ -134,8 +134,10 @@ find %{buildroot} -name '*.la' | xargs rm -f
 
 %files
 %defattr(-,root,root)
+
 # Note: legacy-dependency override of binary's path
 ###%{_bindir}/biostimer-warranty-metric
+
 %{_libexecdir}/biostimer-warranty-metric
 %{_mandir}/man1/biostimer-warranty-metric*
 %config(noreplace) %{_sysconfdir}/fty-warranty/biostimer-warranty-metric.cfg
